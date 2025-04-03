@@ -1,4 +1,4 @@
-package com.example.call_organizer
+package com.harshmantechnologies.call_organizer
 
 import io.flutter.embedding.android.FlutterActivity
 
