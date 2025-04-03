@@ -1,5 +1,8 @@
+import 'package:call_log/call_log.dart';
+import 'package:call_organizer/call_log_handler/call_log.handler.dart';
+import 'package:call_organizer/call_log_handler/dto/call_log_dto.dart';
+import 'package:call_organizer/permission_handler/permission_handler_manager.dart';
 import 'package:flutter/material.dart';
-import 'permission_handler/permission_handler_manager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,7 +63,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    checkAndRequestPermissions(context);
+    _checkPermissionAndPrintCallLogs();
+  }
+
+  Future<void> _checkPermissionAndPrintCallLogs() async {
+    bool isAllPermissionAllowed = await checkAndRequestPermissions(context);
+    if (isAllPermissionAllowed) {
+      List<CallLogEntry> callLogs = await getCallLogs();
+      for (var call in callLogs) {
+        CallLogDTO callLogDTO = CallLogDTO.fromCallLogEntry(call);
+      }
+    }
   }
 
   void _incrementCounter() {
