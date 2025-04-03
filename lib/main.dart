@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'permission_handler_manager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,6 +56,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    checkAndRequestPermissions(context);
+  }
 
   void _incrementCounter() {
     setState(() {
