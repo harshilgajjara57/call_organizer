@@ -6,7 +6,7 @@ class CallLogDTO {
   final String? simDisplayName;
   final String? cachedMatchedNumber;
   final String? cachedNumberLabel;
-  final CallType? callType;
+  final CallType callType;
   final int? duration;
   final int? cachedNumberType;
   final String? formattedNumber;
@@ -19,7 +19,7 @@ class CallLogDTO {
       simDisplayName = call.simDisplayName,
       cachedMatchedNumber = call.cachedMatchedNumber,
       cachedNumberLabel = call.cachedNumberLabel,
-      callType = call.callType,
+      callType = call.callType ?? CallType.unknown,
       duration = call.duration,
       cachedNumberType = call.cachedNumberType,
       formattedNumber = call.formattedNumber,
