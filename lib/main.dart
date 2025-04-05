@@ -1,8 +1,10 @@
 import 'package:call_log/call_log.dart';
-import 'package:call_organizer/call_log_handler/call_log.handler.dart';
-import 'package:call_organizer/call_log_handler/dto/call_log_dto.dart';
-import 'package:call_organizer/permission_handler/permission_handler_manager.dart';
+import 'package:call_organizer/call_logs/call_log.dart';
+import 'package:call_organizer/call_logs/dto/call_log_dto.dart';
+import 'package:call_organizer/contacts/contact_handler.dart';
+import 'package:call_organizer/permissions/permission_handler.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/contact.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,6 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
       List<CallLogEntry> callLogs = await getCallLogs();
       List<CallLogDTO> callLogDTOs =
           callLogs.map((call) => CallLogDTO.fromCallLogEntry(call)).toList();
+      List<Contact> contacts = await getContacts();
+      contacts.forEach((c) async {
+        print("Name: ${c.displayName}");
+      });
+      await insertContact();
       setState(() {
         _callLogDTOs = callLogDTOs; // Update the list of DTOs
       });
